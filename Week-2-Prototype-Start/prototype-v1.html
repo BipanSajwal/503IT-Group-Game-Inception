@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phishing Awareness Game</title>
+
+  <!-- CSS File -->
+  <link rel="stylesheet" href="prototype-v1.css"/>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="left-section">
+
+      <div class="logo-area">
+        <img class="logo-icon" src="logo.png" alt="Phishing awareness game logo" />
+
+        <div>
+          <h1>Welcome!</h1>
+          <h2>Email Safety Starts with You</h2>
+        </div>
+      </div>
+
+      <p class="description">
+        Learn practical email safety with a short, realistic quiz.
+        No  fake hype — just real phishing awareness in minutes.
+      </p>
+
+      <div class="callout">
+        <p>Ready for a quick confidence check? Start with a single click.</p>
+      </div>
+
+      <div class="button-row">
+        <button class="start-btn">Start Quiz →</button>
+        <button class="secondary-btn" id="instructionBtn" type="button">See Instructions →</button>
+      </div>
+
+    </div>
+
+
+    <div class="right-section">
+
+      <div class="right-image">
+        <video class="right-video" autoplay muted loop playsinline poster="welcone.png">
+          <source src="phishing.mp4" type="video/mp4" />
+          Your browser does not support the video element.
+        </video>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-icon">📩</div>
+
+        <div>
+          <h4>Think Before You Click.</h4>
+          <p>Spot Phishing. Stop Scams.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-overlay" id="instructionModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="closeModal" aria-label="Close instructions">×</button>
+      <div class="modal-header">
+        <img class="logo-icon" src="logo.png" alt="Phishing awareness game logo" />
+        <div>
+          <h1 id="modalTitle">Email Phishing Quiz Instructions</h1>
+          <p>Read the quick tips below, then close this panel to start.</p>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <section>
+          <h3>How to Play</h3>
+          <p>Review each email carefully. Choose <strong>PHISHING</strong> when it looks suspicious or unsafe, and <strong>GENUINE</strong> when it appears real and trustworthy.</p>
+        </section>
+
+        <section>
+          <h3>Example Question</h3>
+          <p><strong>From:</strong> security@update-account.com</p>
+          <p><strong>Subject:</strong> Urgent: Verify Your Account</p>
+          <p>If the message pressures you to click a link or give personal details, it is usually a phishing attempt.</p>
+        </section>
+
+        <section>
+          <h3>Scoring</h3>
+          <ul>
+            <li>There are 10 questions total.</li>
+            <li>Each correct answer is worth 10 points.</li>
+            <li>A score of 70 or above is considered a pass.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Tip</h3>
+          <p>Always stop and think before clicking. Look for unusual sender addresses, spelling mistakes, or urgent requests.</p>
+        </section>
+      </div>
+
+      <div class="modal-actions">
+        <button class="start-btn" id="closeModalBottom" type="button">Got it, close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const instructionBtn = document.getElementById('instructionBtn');
+    const modal = document.getElementById('instructionModal');
+    const closeModalButtons = [
+      document.getElementById('closeModal'),
+      document.getElementById('closeModalBottom')
+    ];
+
+    function openModal() {
+      modal.style.display = 'grid';
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    instructionBtn.addEventListener('click', openModal);
+    closeModalButtons.forEach(button => button.addEventListener('click', closeModal));
+    modal.addEventListener('click', event => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
+
