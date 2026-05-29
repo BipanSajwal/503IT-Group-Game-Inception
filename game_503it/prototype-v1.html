@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phishing Awareness Game</title>
+
+  <!-- CSS File -->
+  <link rel="stylesheet" href="prototype-v1.css"/>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="left-section">
+
+      <div class="logo-area">
+        <img class="logo-icon" src="logo.png" alt="Phishing awareness game logo" />
+
+        <div>
+          <h1>Welcome!</h1>
+          <h2>Email Safety Starts with You</h2>
+        </div>
+      </div>
+
+      <p class="description">
+        Learn practical email safety with a short, realistic quiz.
+        No  fake hype — just real phishing awareness in minutes.
+      </p>
+
+      <div class="callout">
+        <p>Ready for a quick confidence check? Start with a single click.</p>
+      </div>
+
+      <div class="button-row">
+        <button id="startQuizBtn" class="start-btn">Start Quiz →</button>
+        <button id="instructionBtn" class="secondary-btn" type="button">See Instructions</button>
+      </div>
+
+    </div>
+
+
+    <div class="right-section">
+
+      <div class="right-image">
+        <video class="right-video" autoplay muted loop playsinline>
+          <source src="phishing.mp4" type="video/mp4" />
+          Your browser does not support the video element.
+        </video>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-icon">📩</div>
+
+        <div>
+          <h4>Think Before You Click.</h4>
+          <p>Spot Phishing. Stop Scams.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Quiz App (hidden until start) -->
+  <div id="quizApp" class="quiz-container" style="display:none;">
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <div class="quiz-title-block">
+          <h2 id="quizTitle">Phishing Awareness Quiz</h2>
+          <div class="quiz-progress" id="quizProgress">Question 1 / 10</div>
+        </div>
+        <div class="live-score" aria-live="polite">Score: <span id="currentScore">0</span></div>
+      </div>
+
+      <div class="question-box" id="questionBox">
+        <div class="question-content">
+          <div class="question-prompt">
+            <img class="question-decor" src="chooseanswer.png" alt="Choose your answer" />
+            <div class="question-preview">
+              <img id="questionImage" src="question-1.png" alt="Email example image" />
+            </div>
+          </div>
+        </div>
+        <div class="choice-row">
+          <button class="choice-btn phishing-btn" data-choice="phishing" id="choicePhishing">PHISHING</button>
+          <button class="choice-btn legit-btn" data-choice="legit" id="choiceLegit">LEGITIMATE</button>
+        </div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="secondary-btn" id="quitQuizBtn" type="button">Quit Quiz</button>
+      </div>
+    </div>
+
+    <div id="answerPopup" class="feedback-popup-overlay" style="display:none;">
+      <div class="feedback-popup">
+        <img id="popupFeedbackImage" src="" alt="feedback image" />
+        <div class="feedback-info">
+          <div class="feedback-item"><span>Domain:</span> <strong id="popupFeedbackDomain"></strong></div>
+          <div class="feedback-item"><span>Threat:</span> <strong id="popupFeedbackThreat"></strong></div>
+        </div>
+        <p id="popupFeedbackText"></p>
+        <button class="start-btn" id="popupNextBtn">Next Question</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="resultScreen" class="result-screen" style="display:none;">
+  <h2 id="resultTitle">Your Result</h2>
+  <div class="result-status" id="resultStatus">Score status</div>
+  <div class="result-video-container">
+    <video id="resultVideo" controls playsinline preload="metadata" src=""></video>
+  </div>
+  <p class="final-score">You scored <strong id="finalScore">0</strong> / 100</p>
+  
+  <p id="resultMessage"></p>
+  <div class="result-actions-fixed">
+    <button class="secondary-btn" id="unmuteBtn" style="display:none;">Enable sound</button>
+    <button class="start-btn" id="restartBtn">Play Again</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="instructionModal" aria-hidden="true" style="display:none;">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="instructionTitle">
+      <button class="modal-close" id="closeModal" aria-label="Close instructions">×</button>
+      <h2 class="instruction-title" id="instructionTitle">Watch Game Instructions</h2>
+      <p class="instructions-summary">This short video shows how to play, what the buttons mean, and how to spot suspicious messages.</p>
+      <div class="modal-video">
+        <video controls playsinline>
+          <source src="instructions.mp4" type="video/mp4" />
+          Your browser does not support the video player.
+        </video>
+      </div>
+      <div class="modal-actions">
+        <button class="secondary-btn" id="backHomeBtn" type="button">Go Back</button>
+        <button class="start-btn" id="startQuizFromInstrBtn" type="button">Play Game</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="quiz-core.js"></script>
+  <script>
+    const instructionBtn = document.getElementById('instructionBtn');
+    const instructionModal = document.getElementById('instructionModal');
+    const closeModalButtons = [
+      document.getElementById('closeModal'),
+      document.getElementById('backHomeBtn')
+    ].filter(Boolean);
+    const instructionalVideo = document.querySelector('#instructionModal video');
+    const startQuizFromInstrBtn = document.getElementById('startQuizFromInstrBtn');
+
+    function openInstructionModal() {
+      if (!instructionModal) return;
+      instructionModal.style.display = 'grid';
+      instructionModal.setAttribute('aria-hidden', 'false');
+      if (instructionalVideo) {
+        instructionalVideo.currentTime = 0;
+        instructionalVideo.play().catch(() => {});
+      }
+    }
+
+    function closeInstructionModal() {
+      if (!instructionModal) return;
+      instructionModal.style.display = 'none';
+      instructionModal.setAttribute('aria-hidden', 'true');
+      if (instructionalVideo) {
+        instructionalVideo.pause();
+      }
+    }
+
+    if (instructionBtn) {
+      instructionBtn.addEventListener('click', openInstructionModal);
+    }
+
+    if (startQuizFromInstrBtn) {
+      startQuizFromInstrBtn.addEventListener('click', () => {
+        closeInstructionModal();
+        startQuiz();
+      });
+    }
+
+    closeModalButtons.forEach(button => {
+      button.addEventListener('click', closeInstructionModal);
+    });
+
+    if (instructionModal) {
+      instructionModal.addEventListener('click', event => {
+        if (event.target === instructionModal) {
+          closeInstructionModal();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
