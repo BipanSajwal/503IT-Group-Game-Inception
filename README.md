@@ -6,7 +6,7 @@ Group Name = INCEPTION
 
 Team Members:
 1) Anu Maya Tamang ( Group Leader)
-2) Bipan Sajwal ( Game Developer and Presentor )
+2) Bipan Sajwal ( Game Developer)
 3) Ramesh k Yadav (Research Lead)
 4) HarmanSingh (Research)
 5) Sandeep k Yadav(Evidence Manager)
