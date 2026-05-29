@@ -1,0 +1,10 @@
+Name 	 Harmanpreet Singh
+Student ID 	 15571867
+GitHub username 	 Harman-boot
+What I worked on today 	 I worked on the Landing page of our Game 
+Tool I used 	HTML, VS Code, GitHub and Canva
+File/prototype part I created or edited 	 As my group leader assign me the task that you have to create the welcome page of the game also every member has assigned the same task as me and the leader will decide the best welcome page for the Game
+Commit message or evidence 	 
+What I learned 	Today I learn how to make animations from Canva and also I learn some advanced coding and also today I learn also the key components that how a game or the application should look which matters alot
+What I need to do next 	 As I try my best to make the welcome page today and in the following weeks I have to complete my individual report and also my group leader will assign me the work  
+
