@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phishing Awareness Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="prototype-v1.css"/>
+</head>
+<body>
+  <button id="settingsToggle" class="settings-toggle" aria-expanded="false" aria-controls="accessibilityPanel" aria-label="Open accessibility settings">⚙️</button>
+  <div class="container">
+    <div class="left-section">
+      <div class="logo-area">
+        <img src="logo.png" alt="Email Simulator logo" class="logo-icon"/>
+        <div>
+          <h1>Email Safety</h1>
+          <h2>Quick phishing quiz</h2>
+        </div>
+      </div>
+      <p class="description">Your inbox can hide scams. Learn to spot them with a short, realistic quiz using real email-style prompts.</p>
+      <div class="callout">Start the quiz, answer each question, and get immediate feedback so you can learn what to watch for.</div>
+      <div class="button-row">
+        <button id="startQuizBtn" class="start-btn">Start Quiz</button>
+        <button id="instructionsBtn" class="secondary-btn">See Instructions →</button>
+      </div>
+      <div class="leaderboard-widget">
+        <div class="leaderboard-widget-header">
+          <strong>Scoreboard</strong>
+          <span id="leaderboardTopScore">Top score: —</span>
+        </div>
+        <button id="openLeaderboardBtn" class="secondary-btn">View Leaderboard</button>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="welcome-visual">
+        <video autoplay muted loop playsinline>
+          <source src="phishing.mp4" type="video/mp4"/>
+          Your browser does not support video.
+        </video>
+      </div>
+      <div class="quote-box">
+        <div class="quote-icon">📩</div>
+        <div>
+          <h4>Think Before You Click</h4>
+          <p>Spot phishing. Stop scams.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="accessibilityPanel" class="settings-panel" aria-hidden="true">
+    <div class="settings-panel-header">
+      <div>
+        <strong>Accessibility</strong>
+        <p class="settings-panel-copy">Adjust text size, contrast, sound, and voice for a more accessible experience.</p>
+      </div>
+      <button id="closeSettingsBtn" class="panel-close" aria-label="Close accessibility settings">×</button>
+    </div>
+    <div class="controls">
+      <button class="text-size active" data-size="medium">A</button>
+      <button class="text-size" data-size="large">A+</button>
+      <button class="text-size" data-size="small">A-</button>
+      <button id="contrastToggle" class="toggle">◑ Contrast</button>
+      <button id="soundToggle" class="toggle" aria-pressed="false">🔇 Sound OFF</button>
+      <button id="voiceToggle" class="toggle" aria-pressed="false">🗣 Voice OFF</button>
+    </div>
+  </div>
+
+  <div id="nameModal" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h1 class="instruction-title">Enter your name</h1>
+        <p class="instructions-summary">Tell us who is playing so we can save your score on the leaderboard.</p>
+      </div>
+      <div class="modal-body">
+        <label for="playerNameInput" class="player-name-label">Player name</label>
+        <input id="playerNameInput" class="player-name-input" type="text" maxlength="20" placeholder="Your name" autocomplete="off" />
+      </div>
+      <div class="modal-actions">
+        <button id="cancelNameBtn" class="secondary-btn">Cancel</button>
+        <button id="saveNameBtn" class="start-btn">Start Game</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="leaderboardModal" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <button id="closeLeaderboardBtn" class="modal-close" aria-label="Close leaderboard">×</button>
+      <div class="leaderboard-panel-row">
+        <div class="leaderboard-banner">
+          <img src="leaderboard.jpg" alt="Old magazine leaderboard cover" />
+          <div class="leaderboard-banner-copy">
+            <span>As the old mag says</span>
+            <h2>Leaderboard</h2>
+            <p>Front-page scores and the story behind every top player.</p>
+          </div>
+          <div class="leaderboard-banner-sticker">
+            Hot list
+            <small>Top 5 revealed</small>
+          </div>
+        </div>
+        <div class="leaderboard-right">
+          <div class="modal-header">
+            <h1 class="instruction-title">Leaderboard</h1>
+            <p class="instructions-summary">Top 5 players from your recent games.</p>
+          </div>
+          <div class="modal-body">
+            <ol id="leaderboardModalList" class="leaderboard-modal-list"></ol>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="leaderboardDoneBtn" class="secondary-btn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quizApp" class="quiz-container" style="display:none;">
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <div class="quiz-title-block">
+          <h2>Phishing Quiz</h2>
+          <p class="quiz-progress" id="quizProgress">Question 1 / 10</p>
+        </div>
+        <button class="secondary-btn" id="quitQuizBtn">Quit</button>
+      </div>
+      <div class="question-box">
+        <div class="question-content">
+          <div class="question-prompt">
+            <img id="questionImage" src="chooseanswer.png" alt="Question image"/>
+          </div>
+          <div class="question-text">Choose whether the email prompt is phishing or legitimate.</div>
+        </div>
+      </div>
+      <div class="choice-row compact-row">
+        <button class="choice-btn phishing-btn" data-choice="phishing"> ❌Phishing</button>
+        <button class="choice-btn legit-btn" data-choice="legit">✅ Legitimate</button>
+      </div>
+    </div>
+    <div class="live-score" id="currentScore">0</div>
+  </div>
+
+  <div id="answerPopup" class="feedback-popup-overlay" style="display:none;">
+    <div class="feedback-popup">
+      <img id="popupFeedbackImage" src="" alt="Feedback illustration"/>
+      <div class="feedback-info">
+        <div class="feedback-item">Sender: <span id="popupFeedbackDomain"></span></div>
+        <div class="feedback-item">Threat: <span id="popupFeedbackThreat"></span></div>
+      </div>
+      <p id="popupFeedbackText"></p>
+      <button id="popupNextBtn" class="start-btn">Next Question</button>
+    </div>
+  </div>
+
+  <div id="resultScreen" class="result-screen" style="display:none;">
+    <div class="result-header">
+      <div>
+        <h1 id="resultTitle">Final Score</h1>
+        <p class="result-status" id="resultStatus"></p>
+        <p id="resultMessage" class="result-message"></p>
+      </div>
+    </div>
+    <div class="final-score" id="finalScore"></div>
+    <div class="result-video-container">
+      <video id="resultVideo" autoplay playsinline preload="auto" muted></video>
+    </div>
+    <div class="result-actions">
+      <button id="restartBtn" class="start-btn">Play Again</button>
+      <button id="returnHomeBtn" class="secondary-btn">Back to Home</button>
+    </div>
+  </div>
+
+  <div id="instructionsModal" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <button id="closeInstructionsBtn" class="modal-close" aria-label="Close instructions">×</button>
+      <div class="modal-header">
+        <h1 class="instruction-title">How to play</h1>
+        <p class="instructions-summary">Read each email prompt and decide whether it is phishing or legitimate. Use the buttons to answer, then review feedback before moving on.</p>
+      </div>
+      <div class="modal-body">
+        <video controls playsinline class="modal-instruction-video" id="instructionsVideo">
+          <source src="instructions.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="modal-actions">
+        <button id="seeAgainBtn" class="secondary-btn">See Again</button>
+        <button id="playGameBtn" class="start-btn">Play Game</button>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="quiz-core.js"></script>
+</body>
+</html>
