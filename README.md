@@ -43,8 +43,7 @@ Built using:
 * HTML
 * CSS
 * JavaScript
-
-** **Gameplay
+## Gameplay
 
 1. Read an email.
 2. Decide if it is **Safe** or a **Scam**.
