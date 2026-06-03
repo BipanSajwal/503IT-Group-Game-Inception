@@ -12,13 +12,12 @@
 * Harman Singh – Researcher
 * Sandeep K. Yadav – Evidence Manager
 
----
 
 ## About the Project
 
 **Trust or Trap?** is an interactive phishing email simulator designed to help users identify phishing emails and online scams through a simple quiz-based experience.
 
----
+
 
 ## Target Audience
 
@@ -26,7 +25,7 @@
 * Users with limited technology knowledge
 * Beginners in cybersecurity awareness
 
----
+
 
 ## Purpose
 
@@ -35,7 +34,7 @@
 * Promote safe internet and email practices
 * Improve digital confidence and security awareness
 
----
+
 
 ## Platform
 
@@ -45,9 +44,7 @@ Built using:
 * CSS
 * JavaScript
 
----
-
-## Gameplay
+** **Gameplay
 
 1. Read an email.
 2. Decide if it is **Safe** or a **Scam**.
