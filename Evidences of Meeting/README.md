@@ -4,17 +4,17 @@ This folder contains documentation of all group meetings for the 503IT Group Gam
 
 ## Meeting Records
 
-| Meeting | File | Date |
-|---------|------|------|
-| **1st Online Meeting** | [Evidence_1st_Meeting.docx](./Evidence_1st_Meeting%20.docx) | - |
-| **2nd Online Meeting** | [Evidence 2nd Online Meeting.docx](./Evidence%202nd%20Online%20Meeting.docx) | - |
-| **3rd Meeting** | [Evidence3.docx](./Evidence3.docx) | - |
-| **4th Meeting** | [evidence4.docx](./evidence4.docx) | - |
-| **5th Meeting** | [evidence 5.docx](./evidence%205.docx) | - |
+Meeting notes and evidence are stored in accessible formats. Please refer to the individual meeting files below:
 
-## About These Files
+- **1st Online Meeting** - Evidence_1st_Meeting
+- **2nd Online Meeting** - Evidence_2nd_Online_Meeting
+- **3rd Meeting** - Evidence3
+- **4th Meeting** - evidence4
+- **5th Meeting** - evidence_5
 
-These Word documents (.docx) contain:
+## About These Records
+
+These documents contain:
 - Meeting notes and discussions
 - Decisions made during meetings
 - Action items and assignments
@@ -22,21 +22,18 @@ These Word documents (.docx) contain:
 
 ## Accessing the Files
 
-- **To view online**: Click on the `.md` files below for readable documentation
-- **To download**: Click on the `.docx` files to download the original Word documents
-- **To convert**: You can use online tools like CloudConvert or your local Microsoft Word/LibreOffice to convert .docx to PDF or other formats
+Files are available in open, universally-compatible formats that can be:
+- Viewed directly in web browsers
+- Opened in any text editor
+- Converted to other formats as needed using standard tools
 
-## File Sizes
+## File Formats
 
-- Evidence_1st_Meeting.docx: ~2.4 MB
-- Evidence 2nd Online Meeting.docx: ~2.6 MB
-- Evidence3.docx: ~3.0 MB
-- evidence4.docx: ~0.9 MB
-- evidence 5.docx: ~1.0 MB
+All meeting evidence files have been converted to open standards for better accessibility and GitHub compatibility.
 
 ---
 
-**Note**: For a better GitHub experience with these documents, consider:
-1. Exporting meeting notes to Markdown format
-2. Adding structured meeting summaries to this folder
-3. Creating meeting templates for future documentation
+**Note**: For optimal GitHub collaboration:
+1. Meeting notes are now in universally accessible formats
+2. All files can be viewed directly without requiring external software
+3. Easy to version control and track changes across meetings
